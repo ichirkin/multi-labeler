@@ -19,13 +19,12 @@ export function mergeLabels(labels: string[], config: Config): string[] {
   const context = github.context
   const payload = context.payload.pull_request || context.payload.issue
   
-  console.log(context);
-
-  const currents =
-    (payload?.labels?.map((label: any) => label.name as string) as string[]) ||
+  const currents: string[] =
+    payload?.labels?.map((label: string) => label.name) ||
     []
   
-  console.log(currents);
+  console.log(currents, 'current');
+  console.log(labels, 'labels');
 
   const removals = (config.labels || [])
     .filter(label => {
@@ -39,7 +38,7 @@ export function mergeLabels(labels: string[], config: Config): string[] {
     .map(value => value.label)
   
   
-  console.log(removals);
+  console.log(removals, 'removes');
 
   return difference(uniq(concat(labels, currents)), removals)
 }
