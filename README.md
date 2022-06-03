@@ -8,6 +8,7 @@
 Multi labeler for title, body, comments, commit messages, branch, author or files. Optionally, generate a status check
 based on the labels.
 
+
 ## Features
 
 - Single compiled javascript file, extremely fast. Use fewer credits!
