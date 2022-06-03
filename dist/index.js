@@ -286,8 +286,10 @@ function mergeLabels(labels, config) {
     var _a;
     const context = github.context;
     const payload = context.payload.pull_request || context.payload.issue;
+    console.log(context);
     const currents = ((_a = payload === null || payload === void 0 ? void 0 : payload.labels) === null || _a === void 0 ? void 0 : _a.map((label) => label.name)) ||
         [];
+    console.log(currents);
     const removals = (config.labels || [])
         .filter(label => {
         // Is sync, not matched and currently added as a label in payload
@@ -296,6 +298,7 @@ function mergeLabels(labels, config) {
             currents.includes(label.label));
     })
         .map(value => value.label);
+    console.log(removals);
     return lodash_1.difference(lodash_1.uniq(lodash_1.concat(labels, currents)), removals);
 }
 exports.mergeLabels = mergeLabels;
