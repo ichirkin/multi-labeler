@@ -18,10 +18,14 @@ import * as github from '@actions/github'
 export function mergeLabels(labels: string[], config: Config): string[] {
   const context = github.context
   const payload = context.payload.pull_request || context.payload.issue
+  
+  console.log(context);
 
   const currents =
     (payload?.labels?.map((label: any) => label.name as string) as string[]) ||
     []
+  
+  console.log(currents);
 
   const removals = (config.labels || [])
     .filter(label => {
@@ -33,6 +37,9 @@ export function mergeLabels(labels: string[], config: Config): string[] {
       )
     })
     .map(value => value.label)
+  
+  
+  console.log(removals);
 
   return difference(uniq(concat(labels, currents)), removals)
 }
