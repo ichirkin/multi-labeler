@@ -20,7 +20,7 @@ export function mergeLabels(labels: string[], config: Config): string[] {
   const payload = context.payload.pull_request || context.payload.issue
   
   const currents: string[] =
-    payload?.labels?.map((label: string) => label.name) ||
+    payload?.labels?.map((label: any) => label.name) ||
     []
   
   console.log(currents, 'current');
